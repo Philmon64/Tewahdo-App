@@ -3,74 +3,103 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>መጽሓፍ ቅዱስ ሓጺር ተፈተኒ | ብዛዕባ ደረጃታት</title>
+<title>መጽሓፍ ቅዱስ ተፈተኒ</title>
 <style>
   :root{
-    --purple-1:#2b0a4a; --purple-2:#3a0e63; --purple-3:#5c1aa1;
-    --gold-1:#ffd166; --gold-2:#ffb703; --accent:#00e3a2; --danger:#ff4d6d;
+    --bg1:#150427; --bg2:#20073b; --bg3:#2a0a4a;
+    --violet:#9b4dff; --violet2:#5c1aa1;
+    --gold:#ffb703; --gold2:#ffd86b;
+    --mint:#00e3a2; --danger:#ff4d6d;
+    --ink:#ffffff;
   }
   *{box-sizing:border-box}
   html,body{height:100%}
   body{
-    margin:0; font-family:"Noto Sans Ethiopic", ui-rounded, "Segoe UI", system-ui, sans-serif;
-    color:#fff;
+    margin:0; color:var(--ink);
+    font-family:"Noto Sans Ethiopic", ui-rounded, "Segoe UI", system-ui, sans-serif;
     background:
       radial-gradient(1200px 600px at 70% -10%, rgba(255,255,255,.08), transparent 60%),
       radial-gradient(900px 500px at -10% 0%, rgba(255,255,255,.06), transparent 50%),
-      linear-gradient(180deg, #150427 0%, #20073b 35%, #2a0a4a 60%, #1a0631 100%);
+      linear-gradient(180deg, var(--bg1) 0%, var(--bg2) 35%, var(--bg3) 60%, #1a0631 100%);
     overflow-x:hidden;
   }
   .stars{position:fixed; inset:0; pointer-events:none}
   .stars i{position:absolute; width:3px; height:3px; background:#fff; border-radius:50%;
-    opacity:.7; filter:drop-shadow(0 0 6px #fff); animation: twinkle 2.4s infinite ease-in-out}
+    opacity:.7; filter:drop-shadow(0 0 6px #fff); animation:twinkle 2.4s infinite ease-in-out}
   @keyframes twinkle{0%,100%{transform:scale(1); opacity:.5} 50%{transform:scale(1.8); opacity:1}}
 
-  .wrap{max-width:960px; margin:40px auto; padding:20px}
+  .wrap{max-width:980px; margin:28px auto 40px; padding:16px}
   .card{
     background: radial-gradient(100% 120% at 50% 0, rgba(255,255,255,.08), rgba(255,255,255,.03) 60%),
                linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
-    border:1px solid rgba(255,255,255,.12); border-radius:24px; padding:28px;
-    box-shadow: 0 20px 60px rgba(0,0,0,.5), inset 0 0 0 1px rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.12); border-radius:24px; padding:22px 22px 26px;
+    box-shadow:0 20px 60px rgba(0,0,0,.5), inset 0 0 0 1px rgba(255,255,255,.05);
     backdrop-filter: blur(6px);
   }
-  .title{display:flex; align-items:center; justify-content:center; gap:14px; font-weight:900; letter-spacing:.5px}
+  .title{display:flex; align-items:center; justify-content:center; gap:14px; font-weight:900}
   .crown{width:72px; height:52px; background:linear-gradient(180deg,#ffe07a,#ffc300 80%);
     border-radius:8px 8px 14px 14px/8px 8px 30px 30px;
     clip-path: polygon(0 55%, 15% 20%, 30% 55%, 50% 18%, 70% 55%, 85% 20%, 100% 55%, 100% 100%, 0 100%);
     box-shadow:0 6px 0 #bf8b00,0 0 30px rgba(255,221,87,.7)}
-  .ribbon{margin:18px auto 6px; width:max-content; padding:10px 18px;
+  .ribbon{margin:10px auto 0; width:max-content; padding:8px 16px;
     background:linear-gradient(180deg,#ff5f8a,#ff2e63); color:#fff; border-radius:999px; font-weight:800}
-  .btn{appearance:none; border:none; cursor:pointer; color:#2b0a4a; padding:14px 22px; border-radius:999px;
-    font-weight:900; font-size:18px; background:linear-gradient(180deg,#ffd86b,#ffb703);
-    box-shadow:0 12px 30px rgba(255,183,3,.35), inset 0 -2px 0 rgba(0,0,0,.15)}
-  .btn:hover{transform:translateY(-2px)} .btn:disabled{opacity:.5; pointer-events:none}
-  .ghost{background:transparent; color:#fff; border:2px solid rgba(255,255,255,.25); box-shadow:none}
-  .bar{height:10px; border-radius:999px; background:rgba(255,255,255,.15); overflow:hidden; margin:14px 0 6px}
-  .bar>span{display:block; height:100%; background:linear-gradient(90deg,#5c1aa1,#9b4dff); width:0%; transition:width .4s}
-  .hud{display:flex; gap:12px; flex-wrap:wrap; justify-content:center; margin:10px 0 20px}
-  .pill{padding:8px 14px; border-radius:999px; font-weight:700; background:rgba(0,0,0,.35); border:1px solid rgba(255,255,255,.12)}
-  .pill.bad{background:rgba(255,77,109,.18); border-color:rgba(255,77,109,.35)}
-  .pill.good{background:rgba(0,227,162,.18); border-color:rgba(0,227,162,.35)}
-  .question{text-align:center; font-size:22px; line-height:1.4; margin:8px 0 18px}
+
+  /* Header HUD with circular timer */
+  .hud{
+    display:grid; grid-template-columns: 120px 1fr 120px; gap:12px; align-items:center;
+    margin:12px 0 10px;
+  }
+  .pill{
+    padding:8px 12px; border-radius:999px; font-weight:700; justify-self:start;
+    background:rgba(0,0,0,.35); border:1px solid rgba(255,255,255,.12)
+  }
+  .pill.right{justify-self:end}
+
+  .timer{
+    place-self:center; position:relative; width:110px; height:110px;
+  }
+  .timer svg{transform:rotate(-90deg)}
+  .timer .ring-bg{stroke:rgba(255,255,255,.18); stroke-width:10; fill:none}
+  .timer .ring{stroke:var(--gold2); stroke-width:10; fill:none; stroke-linecap:round}
+  .timer .num{
+    position:absolute; inset:0; display:grid; place-items:center;
+    font-size:32px; font-weight:900; text-shadow:0 2px 12px rgba(0,0,0,.35)
+  }
+
+  .bar{height:10px; border-radius:999px; background:rgba(255,255,255,.15); overflow:hidden; margin:6px 0 6px}
+  .bar>span{display:block; height:100%; background:linear-gradient(90deg, var(--violet2), var(--violet)); width:0%; transition:width .4s}
+
+  .question{text-align:center; font-size:22px; line-height:1.45; margin:6px 0 14px}
+  .type-badge{opacity:.9; font-weight:800; text-align:center; margin-bottom:3px}
+
   .options{display:grid; gap:12px}
-  .option{border:2px solid rgba(255,255,255,.18); background:rgba(0,0,0,.25); padding:14px; border-radius:16px; text-align:center; font-weight:700; cursor:pointer}
-  .option:hover{border-color:#9b4dff; background:rgba(155,77,255,.1)}
-  .option.selected{border-color:#9b4dff; background:rgba(155,77,255,.18)}
-  .option.correct{border-color:#00e3a2; background:rgba(0,227,162,.18)}
-  .option.wrong{border-color:#ff4d6d; background:rgba(255,77,109,.18)}
-  .blank{background:transparent; color:#fff; border:none; border-bottom:3px dotted #ffd166; padding:4px 6px; font-size:20px; text-align:center; outline:none; min-width:120px}
-  .match-wrap{position:relative} .match{display:grid; grid-template-columns:1fr 1fr; gap:14px; align-items:start; margin-top:8px}
+  .option{border:2px solid rgba(255,255,255,.18); background:rgba(0,0,0,.25); padding:14px; border-radius:16px; text-align:center; font-weight:800; cursor:pointer}
+  .option:hover{border-color:var(--violet); background:rgba(155,77,255,.1)}
+  .option.selected{border-color:var(--violet); background:rgba(155,77,255,.18)}
+  .option.correct{border-color:var(--mint); background:rgba(0,227,162,.18)}
+  .option.wrong{border-color:var(--danger); background:rgba(255,77,109,.18)}
+  .blank{background:transparent; color:#fff; border:none; border-bottom:3px dotted var(--gold2); padding:4px 6px; font-size:20px; text-align:center; outline:none; min-width:120px}
+
+  .match-wrap{position:relative}
+  .match{display:grid; grid-template-columns:1fr 1fr; gap:14px; align-items:start; margin-top:8px}
   .col{display:flex; flex-direction:column; gap:10px}
   .chip{background:rgba(0,0,0,.25); border:2px solid rgba(255,255,255,.18); border-radius:14px; padding:10px 12px; text-align:center; font-weight:800; cursor:pointer; user-select:none}
-  .chip:hover{border-color:#9b4dff; background:rgba(155,77,255,.12)}
-  .chip.selected{border-color:#ffd166; background:rgba(255,209,102,.2)}
-  .chip.locked{border-color:#00e3a2; background:rgba(0,227,162,.18); cursor:default}
+  .chip:hover{border-color:var(--violet); background:rgba(155,77,255,.12)}
+  .chip.selected{border-color:var(--gold2); background:rgba(255,209,102,.2)}
+  .chip.locked{border-color:var(--mint); background:rgba(0,227,162,.18); cursor:default}
   .connector{position:absolute; inset:0; pointer-events:none}
-  .connector line{stroke:#ffd166; stroke-width:3; stroke-linecap:round; stroke-dasharray:4 6; filter:drop-shadow(0 0 6px rgba(255,209,102,.75))}
+  .connector line{stroke:var(--gold2); stroke-width:3; stroke-linecap:round; stroke-dasharray:4 6; filter:drop-shadow(0 0 6px rgba(255,209,102,.75))}
+
+  .footer{display:flex; gap:12px; justify-content:center; margin-top:14px; flex-wrap:wrap}
+  .btn{appearance:none; border:none; cursor:pointer; color:#2b0a4a; padding:14px 22px; border-radius:999px; font-weight:900; font-size:18px;
+    background:linear-gradient(180deg, var(--gold2), var(--gold)); box-shadow:0 12px 30px rgba(255,183,3,.35), inset 0 -2px 0 rgba(0,0,0,.15)}
+  .btn:hover{transform:translateY(-2px)}
+  .btn:disabled{opacity:.55; pointer-events:none}
+  .ghost{background:transparent; color:#fff; border:2px solid rgba(255,255,255,.25); box-shadow:none}
+
   .modal{display:none; position:fixed; inset:0; background:rgba(0,0,0,.6); place-items:center; z-index:20}
   .modal .panel{width:min(640px, 92vw); text-align:center}
   .big-score{font-size:56px; font-weight:900; color:#ffd166; text-shadow:0 6px 0 #b38800}
-  .footer{display:flex; gap:12px; justify-content:center; margin-top:16px; flex-wrap:wrap}
 </style>
 </head>
 <body>
@@ -80,37 +109,44 @@
   <div class="card" id="screen">
     <div class="title">
       <div class="crown"></div>
-      <div style="font-size:28px">መጽሓፍ ቅዱስ ተፈተኒ</div>
+      <div style="font-size:28px; font-weight:900">መጽሓፍ ቅዱስ ተፈተኒ</div>
     </div>
     <div class="ribbon" id="ribbon">ደረጃ 1</div>
 
+    <!-- HUD with circular timer -->
     <div class="hud">
-      <div class="pill"><b>ደረጃ:</b> <span id="levelNum">1</span>/4</div>
-      <div class="pill"><b>ጥያቄ</b> <span id="qIndex">1</span>/10</div>
-      <div class="pill"><b>ነባር</b> <span id="score">0</span></div>
-      <div class="pill" id="timerPill"><b>ጊዜ</b> <span id="timer">00:33</span></div>
+      <div class="pill"><b>ደረጃ:</b> <span id="levelNum">1</span>/<span id="levelTotal">1</span></div>
+      <div class="timer" aria-label="ጊዜ">
+        <svg width="110" height="110">
+          <circle class="ring-bg" cx="55" cy="55" r="46"></circle>
+          <circle id="ring" class="ring" cx="55" cy="55" r="46" stroke-dasharray="289" stroke-dashoffset="0"></circle>
+        </svg>
+        <div class="num" id="timerNum">33</div>
+      </div>
+      <div class="pill right"><b>ጥያቄ:</b> <span id="qIndex">0</span>/<span id="qTotal">10</span></div>
     </div>
 
     <div class="bar"><span id="progress"></span></div>
 
+    <div class="type-badge" id="typeBadge"></div>
     <div class="question" id="questionText">ጀምር ንምብራር።</div>
-
     <div id="content"></div>
 
     <div class="footer">
-      <button id="btnPrev" class="btn ghost">⬅ ቀዳሚ</button>
-      <button id="btnNext" class="btn">ዝቕጽል ➜</button>
-      <button id="btnStart" class="btn" style="display:none">ጀምር</button>
+      <button id="btnPrev" class="btn ghost" style="display:none">⬅ ቀዳሚ</button>
+      <button id="btnNext" class="btn" style="display:none">ዝቕጽል ➜</button>
+      <button id="btnStart" class="btn">ጀምር</button>
     </div>
   </div>
 </div>
 
+<!-- Level modal -->
 <div class="modal" id="modal">
   <div class="card panel">
     <div class="crown" style="margin:0 auto 10px"></div>
     <div class="ribbon" id="modalRibbon">ደረጃ ተዛሪቡ</div>
-    <div class="big-score" id="modalScore">9 / 10</div>
-    <div class="question" id="modalMsg">መልእኽቲ</div>
+    <div class="big-score" id="modalScore">0 / 10</div>
+    <div class="question" id="modalMsg">9/10 ኣብ ዝተሓለፈ ደረጃ ክትኣቱ ኣለኻ/ኪ።</div>
     <div class="footer">
       <button id="btnRetry" class="btn ghost">ደረጃ ድገም</button>
       <button id="btnNextLevel" class="btn">ዝቕጽል ደረጃ ▶</button>
@@ -119,191 +155,236 @@
 </div>
 
 <script>
-/* ሰማያዊ ኮከቦት */
+/* --- Star background --- */
 (function(){const w=document.getElementById('stars'); for(let i=0;i<80;i++){const s=document.createElement('i'); s.style.left=Math.random()*100+'%'; s.style.top=Math.random()*100+'%'; s.style.animationDuration=(1.5+Math.random()*2.5)+'s'; w.appendChild(s);}})();
 
-/* እቲ ናይ ጥያቄታት ዝርዝር — ከም ዝነበረ ብትግርኛ */
+/* ---------------------- QUESTIONS ---------------------- */
+/* Replace ONLY this array with your own Tigrigna questions.
+   Supported types:
+   - multiple: {type:'multiple', question:'...', options:['A','B','C','D'], correct:0, typeBadge:'...'}
+   - fill:     {type:'fill', question:'...', text:'... _____ ...', answer:'...', typeBadge:'...'}
+   - matching: {type:'matching', question:'...', pairs:[{left:'', right:''}, ...], typeBadge:'...'}
+*/
 const quizData = [
-            // Matching Names to Stories (10 questions)
-            {
-                type: 'matching',
-                typeBadge: '👥 ስማትን ዛንታታትን',
-                question: 'እዞም ስማት ምስ ዛንታታቶም ኣዛምዱ',
-                pairs: [
-                    { left: 'ዳዊት', right: 'ጎልያድ ዝቐተለ' },
-                    { left: 'ኖህ', right: 'መርከብ ዝሰርሐ' },
-                    { left: 'ዮናስ', right: 'ኣብ ከብዲ ዓሳ ዝኣተወ' },
-                    { left: 'ሙሴ', right: 'ቀይሕ ባሕሪ ዝመቐለ' }
-                ]
-            },
-            {
-                type: 'multiple',
-                typeBadge: '📖 ካብ ዛንታ ምምራጽ',
-                question: 'መን እዩ እቲ ህዝቢ እስራኤል ካብ ግብጺ ዘውጽኤ?',
-                options: ['ሙሴ', 'ኣብራሃም', 'ዳዊት', 'ሰሎሞን'],
-                correct: 0,
-                hint: 'ኣብ ቀይሕ ባሕሪ ተኣምር ዝገበረ'
-            },
-            {
-                type: 'fill',
-                typeBadge: '✍️ መዝሙር ምምላእ',
-                question: 'መዝሙር 23:1 ምምላእ',
-                text: 'እግዚኣብሄር _____ እዩ፣ ኣይክጎድልን እየ።',
-                answer: 'ጓሳይ',
-                hint: 'ኣባጊዕ ዝሕሉ'
-            },
-            {
-                type: 'multiple',
-                typeBadge: '📖 ካብ ዛንታ ምምራጽ',
-                question: 'ኣብ ዕዳጋ ባቢሎን መን እዮም እቶም ሰለስተ መንእሰያት?',
-                options: ['ሻድራክ፣ ሜሻክ፣ ኣቤድነጎ', 'ጴጥሮስ፣ ያቆብ፣ ዮሃንስ', 'ኣብራሃም፣ ይስሃቅ፣ ያቆብ', 'ዳዊት፣ ሰሎሞን፣ ኣሳ'],
-                correct: 0,
-                hint: 'ኣብ ሓዊ ዘይነደዱ'
-            },
-            {
-                type: 'matching',
-                typeBadge: '👥 ሓዋርያት',
-                question: 'ሓዋርያት ምስ ምንባር ኣዛምዱ',
-                pairs: [
-                    { left: 'ጴጥሮስ', right: 'ኣብ ማዕሪ ሕማቕ ሓሰኻ' },
-                    { left: 'ቶማስ', right: 'ፈሊስት ዝገልጸ' },
-                    { left: 'ጴውሎስ', right: 'ኣብ ሱረ መንግስቲ ተቀይረ' },
-                    { left: 'ዮሓንስ', right: 'ሓዋርያ የውዳእ' }
-                ]
-            },
-            /* ... (እዚ ዝተረኽበ ዝርዝር ብትግርኛ ሙሉ ከም ፋይልካ ይቕሬታ ይሕርስ። ከም ተቐሚጡ 40 ጥያቄ ኣሎ) ... */
+  /* SAMPLE (you can delete these and paste yours) */
+  {type:'multiple', typeBadge:'📖 ካብ ዛንታ', question:'መን እዩ እቲ ህዝቢ እስራኤል ካብ ግብጺ ዘውጽአ?', options:['ሙሴ','ኣብርሃም','ዳዊት','ሰሎሞን'], correct:0},
+  {type:'fill', typeBadge:'✍️ መዝሙር', question:'መዝሙር 23፡1 ምምላእ', text:'እግዚኣብሄር _____ እዩ፣ ኣይክጎድልን እየ።', answer:'ጓሳይ'},
+  {type:'matching', typeBadge:'👥 ስማትን ዛንታታትን', question:'ስማት ምስ ዛንታታቶም ኣዛምዱ', pairs:[
+    {left:'ዳዊት', right:'ጎልያድ ዝቐተለ'}, {left:'ኖህ', right:'መርከብ ዝሰርሐ'}, {left:'ዮናስ', right:'ኣብ ከብዲ ዓሳ ዝኣተወ'}, {left:'ሙሴ', right:'ቀይሕ ባሕሪ ዝመቐለ'}
+  ]},
+  // … add the rest of your questions here …
 ];
 
-/* ቁጥር ደረጃ/ጥያቄ */
-const QUESTIONS_PER_LEVEL = 10, LEVELS = 4;
+/* ---------------------- ENGINE ---------------------- */
+const QUESTIONS_PER_LEVEL = 10;                // keeps 9/10 rule predictable
+const LEVELS = Math.max(1, Math.ceil(quizData.length / QUESTIONS_PER_LEVEL));
 
-/* ሁነታ መግባር */
 let level=1, orderPerLevel=[], indexInLevel=0, scoreThisLevel=0, totalScore=0;
-let currentQuestion=null, countdown=null, timeLeft=0;
+let currentQuestion=null, countdown=null, timeLeft=0, timeLimit=33;
 
-const el=id=>document.getElementById(id);
-const screen={ ribbon:el('ribbon'), levelNum:el('levelNum'), qIndex:el('qIndex'),
-  score:el('score'), timer:el('timer'), progress:el('progress'),
-  question:el('questionText'), content:el('content'),
-  btnPrev:el('btnPrev'), btnNext:el('btnNext'), btnStart:el('btnStart') };
-const modal={ root:el('modal'), ribbon:el('modalRibbon'), score:el('modalScore'),
-  msg:el('modalMsg'), btnRetry:el('btnRetry'), btnNext:el('btnNextLevel') };
+const $ = (id)=>document.getElementById(id);
+const ui = {
+  ribbon: $('ribbon'), levelNum:$('levelNum'), levelTotal:$('levelTotal'), qIndex:$('qIndex'), qTotal:$('qTotal'),
+  typeBadge:$('typeBadge'), question:$('questionText'), content:$('content'),
+  btnPrev:$('btnPrev'), btnNext:$('btnNext'), btnStart:$('btnStart'),
+  modal:$('modal'), modalScore:$('modalScore'), modalMsg:$('modalMsg'), btnRetry:$('btnRetry'), btnNextLevel:$('btnNextLevel'),
+  progress:$('progress'), ring:$('ring'), timerNum:$('timerNum')
+};
+ui.levelTotal.textContent = LEVELS;
+ui.qTotal.textContent = QUESTIONS_PER_LEVEL;
 
-/* ሕጡጡ ሓገዝ */
-function shuffle(a){const x=[...a]; for(let i=x.length-1;i>0;i--){const j=(Math.random()*(i+1))|0; [x[i],x[j]]=[x[j],x[i]];} return x;}
-function formatTime(s){s=Math.max(0,s|0); return `${String((s/60)|0).padStart(2,'0')}:${String(s%60).padStart(2,'0')}`;}
-function calcTimeLimit(q){let text=q.question||''; if(q.text) text+=' '+q.text; if(q.options) text+=' '+q.options.join(' ');
-  if(q.pairs) text+=' '+q.pairs.map(p=>p.left+' '+p.right).join(' '); const L=text.length;
-  const min=33,max=120; return Math.round(min+Math.min(1,L/220)*(max-min));}
-
-/* ጀምር ደረጃታት ብራንዶም */
-function resetAll(){
-  level=1; orderPerLevel=[];
-  for(let L=0;L<LEVELS;L++){const start=L*QUESTIONS_PER_LEVEL;
-    const slice=[...Array(QUESTIONS_PER_LEVEL)].map((_,i)=>start+i);
+/* create order per level safely */
+function buildOrder(){
+  orderPerLevel=[];
+  for(let L=0; L<LEVELS; L++){
+    const start = L*QUESTIONS_PER_LEVEL;
+    const end   = Math.min(start+QUESTIONS_PER_LEVEL, quizData.length);
+    const slice = [];
+    for(let i=start;i<end;i++) slice.push(i);
     orderPerLevel.push(shuffle(slice));
   }
-  indexInLevel=0; totalScore=0; scoreThisLevel=0; updateHud(); showStart();
+}
+function shuffle(a){const x=[...a]; for(let i=x.length-1;i>0;i--){const j=(Math.random()*(i+1))|0; [x[i],x[j]]=[x[j],x[i]];} return x;}
+function clamp(n,min,max){return Math.max(min,Math.min(max,n));}
+function timeString(s){s=Math.max(0,s|0); return `${((s/60)|0)}:${String(s%60).padStart(2,'0')}`;}
+function calcTimeLimit(q){
+  let t=q.question||''; if(q.text) t+=' '+q.text; if(q.options) t+=' '+q.options.join(' '); if(q.pairs) t+=' '+q.pairs.map(p=>p.left+' '+p.right).join(' ');
+  const L=t.length; return Math.round(33 + Math.min(1, L/220) * (120-33));
+}
+
+/* circular ring helpers */
+const CIRC = { r:46, len: 2*Math.PI*46 };
+function setRing(percent){ // 1 -> full, 0 -> empty
+  const off = CIRC.len * (1-percent);
+  ui.ring.setAttribute('stroke-dasharray', CIRC.len.toFixed(1));
+  ui.ring.setAttribute('stroke-dashoffset', off.toFixed(1));
+  // color shift a bit on danger
+  if(percent < .25){ ui.ring.style.stroke = '#ff7b7b'; }
+  else ui.ring.style.stroke = '#ffd86b';
+}
+
+/* STATE */
+function resetAll(){
+  buildOrder();
+  level=1; indexInLevel=0; scoreThisLevel=0; totalScore=0;
+  ui.levelNum.textContent=level;
+  ui.ribbon.textContent=`ደረጃ ${level}`;
+  ui.qIndex.textContent='0';
+  ui.progress.style.width='0%';
+  ui.btnStart.style.display='inline-block';
+  ui.btnPrev.style.display='none';
+  ui.btnNext.style.display='none';
+  ui.typeBadge.textContent='';
+  ui.question.textContent='ጀምር ንምብራር።';
+  ui.content.innerHTML='';
+  setRing(1); ui.timerNum.textContent='33';
 }
 resetAll();
 
+/* NAV */
+ui.btnStart.onclick = ()=>{ startLevel(); };
+ui.btnPrev.onclick  = ()=>{ if(indexInLevel>0){ indexInLevel--; loadQuestion(); }};
+ui.btnNext.onclick  = ()=>{ if(!currentQuestion._locked) lockQuestion(false);
+  const lastIndex = orderPerLevel[level-1].length-1;
+  if(indexInLevel < lastIndex){ indexInLevel++; loadQuestion(); }
+  else openLevelModal();
+};
+ui.btnRetry.onclick = ()=>{ ui.modal.style.display='none'; indexInLevel=0; scoreThisLevel=0; orderPerLevel[level-1]=shuffle(orderPerLevel[level-1]); showStart(); };
+ui.btnNextLevel.onclick = ()=>{ ui.modal.style.display='none'; if(level<LEVELS){ level++; showStart(); } };
+
 function showStart(){
-  screen.question.textContent='ጀምር ንምብራር።';
-  screen.content.innerHTML=''; screen.btnStart.style.display='inline-block';
-  screen.btnPrev.style.display='none'; screen.btnNext.style.display='none';
-  screen.ribbon.textContent=`ደረጃ ${level}`;
+  ui.levelNum.textContent=level; ui.ribbon.textContent=`ደረጃ ${level}`;
+  ui.qIndex.textContent='0'; ui.progress.style.width='0%';
+  ui.btnStart.style.display='inline-block'; ui.btnPrev.style.display='none'; ui.btnNext.style.display='none';
+  ui.typeBadge.textContent=''; ui.question.textContent='ጀምር ንምብራር።'; ui.content.innerHTML='';
+  setRing(1); ui.timerNum.textContent='33';
 }
-function startLevel(){ indexInLevel=0; scoreThisLevel=0;
-  screen.btnStart.style.display='none'; screen.btnPrev.style.display='inline-block'; screen.btnNext.style.display='inline-block';
+function startLevel(){
+  indexInLevel=0; scoreThisLevel=0;
+  ui.btnStart.style.display='none'; ui.btnPrev.style.display='inline-block'; ui.btnNext.style.display='inline-block';
   loadQuestion();
 }
-function updateHud(){
-  screen.levelNum.textContent=level;
-  screen.qIndex.textContent=Math.min(indexInLevel+1,QUESTIONS_PER_LEVEL);
-  screen.score.textContent=`${scoreThisLevel}/${QUESTIONS_PER_LEVEL}`;
-  screen.progress.style.width=((indexInLevel)/QUESTIONS_PER_LEVEL*100)+'%';
-}
 function loadQuestion(){
-  const qIndex=orderPerLevel[level-1][indexInLevel];
-  currentQuestion=JSON.parse(JSON.stringify(quizData[qIndex]||{}));
-  screen.question.textContent=currentQuestion.question||'';
-  screen.content.innerHTML=''; updateHud();
+  stopTimer();
+  const order = orderPerLevel[level-1];
+  if(!order || order.length===0){ ui.question.textContent='ጥያቄ የለን።'; return; }
+  const qi = order[indexInLevel];
+  currentQuestion = JSON.parse(JSON.stringify(quizData[qi])); // safe copy
+  if(!currentQuestion){ ui.question.textContent='ጥያቄ የለን።'; return; }
+
+  ui.typeBadge.textContent = currentQuestion.typeBadge || '';
+  ui.question.textContent  = currentQuestion.question || '';
+  ui.content.innerHTML     = '';
+  ui.levelNum.textContent  = level;
+  ui.qIndex.textContent    = (indexInLevel+1);
+  ui.qTotal.textContent    = QUESTIONS_PER_LEVEL;
+  ui.progress.style.width  = ((indexInLevel)/QUESTIONS_PER_LEVEL*100)+'%';
+
   if(currentQuestion.type==='multiple') renderMultiple(currentQuestion);
   else if(currentQuestion.type==='fill') renderFill(currentQuestion);
   else renderMatching(currentQuestion);
-  startTimer(calcTimeLimit(currentQuestion));
-}
-function startTimer(sec){clearInterval(countdown); timeLeft=sec;
-  screen.timer.textContent=formatTime(timeLeft);
-  countdown=setInterval(()=>{ timeLeft--; screen.timer.textContent=formatTime(timeLeft);
-    if(timeLeft<=0){ clearInterval(countdown); lockQuestion(false); } },1000);
+
+  timeLimit = calcTimeLimit(currentQuestion);
+  startTimer(timeLimit);
 }
 
-/* ምምራጽ */
+/* TIMER */
+function startTimer(sec){
+  timeLeft = sec|0; ui.timerNum.textContent = timeLeft; setRing(1);
+  countdown = setInterval(()=>{
+    timeLeft--; ui.timerNum.textContent = timeLeft;
+    setRing(clamp(timeLeft / sec, 0, 1));
+    if(timeLeft<=0){ stopTimer(); lockQuestion(false); }
+  }, 1000);
+}
+function stopTimer(){ if(countdown){ clearInterval(countdown); countdown=null; }}
+
+/* RENDERERS */
 function renderMultiple(q){
   const box=document.createElement('div'); box.className='options'; q._selected=null;
   (q.options||[]).forEach((opt,i)=>{const d=document.createElement('div'); d.className='option'; d.textContent=opt;
     d.onclick=()=>{ if(q._locked) return; [...box.children].forEach(c=>c.classList.remove('selected')); d.classList.add('selected'); q._selected=i; };
-    box.appendChild(d);}); screen.content.appendChild(box);
+    box.appendChild(d);});
+  ui.content.appendChild(box);
 }
-/* ቁሩብ ምምላእ */
 function renderFill(q){
   const p=document.createElement('p'); p.style.textAlign='center';
   const parts=(q.text||'').split('_____'); p.innerHTML=`${parts[0]||''} <input class="blank" id="blank" placeholder="መልሲ" autocomplete="off" /> ${parts[1]||''}`;
-  screen.content.appendChild(p);
+  ui.content.appendChild(p);
 }
-/* መዛግብ Matching ብተዓማማይ ነጥቢ መስመር */
 function renderMatching(q){
   const wrap=document.createElement('div'); wrap.className='match-wrap';
   const svg=document.createElementNS('http://www.w3.org/2000/svg','svg'); svg.classList.add('connector'); wrap.appendChild(svg);
   const grid=document.createElement('div'); grid.className='match';
   const left=document.createElement('div'); left.className='col';
   const right=document.createElement('div'); right.className='col';
-  grid.appendChild(left); grid.appendChild(right); wrap.appendChild(grid); screen.content.appendChild(wrap);
+  grid.appendChild(left); grid.appendChild(right); wrap.appendChild(grid); ui.content.appendChild(wrap);
 
   const shuffledRight=shuffle((q.pairs||[]).map((p,idx)=>({text:p.right, idx})));
   q._links={}; q._locked=false; q._selectedLeft=null;
   const rightByText=Object.fromEntries((q.pairs||[]).map((p,i)=>[p.right,i]));
+
   (q.pairs||[]).forEach((pair,li)=>{const chip=document.createElement('div'); chip.className='chip'; chip.textContent=pair.left; chip.dataset.left=li;
     chip.onclick=()=>{ if(q._locked||chip.classList.contains('locked'))return; [...left.children].forEach(c=>c.classList.remove('selected')); chip.classList.add('selected'); q._selectedLeft=li; };
     left.appendChild(chip);});
   shuffledRight.forEach((r)=>{const chip=document.createElement('div'); chip.className='chip'; chip.textContent=r.text; chip.dataset.right=r.idx;
     chip.onclick=()=>{ if(q._locked||chip.classList.contains('locked')||q._selectedLeft==null) return;
       const L=q._selectedLeft, Rorig=+chip.dataset.right; q._links[L]=Rorig;
-      chip.classList.add('locked'); left.children[L].classList.add('locked'); left.children[L].classList.remove('selected'); drawConnector(svg,left.children[L],chip);
+      chip.classList.add('locked'); left.children[L].classList.add('locked'); left.children[L].classList.remove('selected');
+      drawConnector(svg,left.children[L],chip,wrap);
       if(Object.keys(q._links).length===(q.pairs||[]).length){
         const ok=Object.entries(q._links).every(([L,R])=> rightByText[q.pairs[L].right]===+R ); lockQuestion(ok);
       }else q._selectedLeft=null; };
     right.appendChild(chip);});
-  function drawConnector(svg,a,b){
-    const s=wrap.getBoundingClientRect(), ra=a.getBoundingClientRect(), rb=b.getBoundingClientRect();
+
+  function drawConnector(svg,a,b,root){
+    const s=root.getBoundingClientRect(), ra=a.getBoundingClientRect(), rb=b.getBoundingClientRect();
     const x1=ra.right-s.left, y1=ra.top+ra.height/2-s.top, x2=rb.left-s.left, y2=rb.top+rb.height/2-s.top;
-    svg.setAttribute('viewBox',`0 0 ${wrap.clientWidth} ${wrap.clientHeight}`); svg.setAttribute('width',wrap.clientWidth); svg.setAttribute('height',wrap.clientHeight);
+    svg.setAttribute('viewBox',`0 0 ${root.clientWidth} ${root.clientHeight}`); svg.setAttribute('width',root.clientWidth); svg.setAttribute('height',root.clientHeight);
     const line=document.createElementNS('http://www.w3.org/2000/svg','line'); line.setAttribute('x1',x1); line.setAttribute('y1',y1); line.setAttribute('x2',x2); line.setAttribute('y2',y2); svg.appendChild(line);
   }
-  new ResizeObserver(()=>{const saved=Object.entries(q._links); svg.innerHTML=''; saved.forEach(([L,R])=>{
-    const lc=left.children[+L]; const rc=[...right.children].find(c=>+c.dataset.right===+R); if(lc&&rc) { const tmp=document.createElementNS('http://www.w3.org/2000/svg','line'); }});
-    Object.entries(q._links).forEach(([L,R])=>{const lc=left.children[+L]; const rc=[...right.children].find(c=>+c.dataset.right===+R); if(lc&&rc){ const s=wrap.getBoundingClientRect(), ra=lc.getBoundingClientRect(), rb=rc.getBoundingClientRect();
-      const x1=ra.right-s.left, y1=ra.top+ra.height/2-s.top, x2=rb.left-s.left, y2=rb.top+rb.height/2-s.top;
-      const line=document.createElementNS('http://www.w3.org/2000/svg','line'); line.setAttribute('x1',x1); line.setAttribute('y1',y1); line.setAttribute('x2',x2); line.setAttribute('y2',y2); svg.appendChild(line); });
-  }).observe(wrap);
+
+  /* redraw lines on resize without heavy observers */
+  window.addEventListener('resize', ()=>{
+    const saved = Object.entries(q._links);
+    svg.innerHTML='';
+    saved.forEach(([L,R])=>{
+      const lc=left.children[+L]; const rc=[...right.children].find(c=>+c.dataset.right===+R);
+      if(lc&&rc) drawConnector(svg, lc, rc, wrap);
+    });
+  }, {passive:true});
 }
-/* መወፈር/መፍረስ መልሲ */
+
+/* CHECK / LOCK */
 function lockQuestion(correct){
-  if(currentQuestion._locked) return; currentQuestion._locked=true; clearInterval(countdown);
+  if(currentQuestion._locked) return; currentQuestion._locked=true; stopTimer();
+
   if(currentQuestion.type==='multiple'){
-    const ops=[...screen.content.querySelectorAll('.option')];
+    const ops=[...ui.content.querySelectorAll('.option')];
     ops.forEach((el,i)=>{ if(i==currentQuestion.correct) el.classList.add('correct');
       if(currentQuestion._selected===i && i!==currentQuestion.correct) el.classList.add('wrong'); el.onclick=null; });
     correct=(currentQuestion._selected===currentQuestion.correct);
   }
   if(currentQuestion.type==='fill'){
-    const val=(screen.content.querySelector('#blank')?.value||'').trim().toLowerCase();
+    const val=(ui.content.querySelector('#blank')?.value||'').trim().toLowerCase();
     correct=(val===String(currentQuestion.answer).toLowerCase());
-    const input=screen.content.querySelector('#blank'); if(input){ input.disabled=true; input.style.borderBottomColor=correct?'#00e3a2':'#ff4d6d';}
+    const input=ui.content.querySelector('#blank'); if(input){ input.disabled=true; input.style.borderBottomColor=correct?'#00e3a2':'#ff4d6d';}
   }
+
   if(correct){ scoreThisLevel++; totalScore++; }
-  screen.score.textContent=`${scoreThisLevel}/${QUESTIONS_PER_LEVEL}`;
 }
-/* መንቀሳቀሲ ናብ ቀጺሉ/ቀዳሚ */
-screen.btnStart.onclick=startL
+
+/* MODAL */
+function openLevelModal(){
+  ui.modal.style.display='grid';
+  ui.modalScore.textContent=`${scoreThisLevel} / ${QUESTIONS_PER_LEVEL}`;
+  const passed = (scoreThisLevel>=9);
+  ui.modalMsg.textContent = passed ? 'ብልጽግና! ዝቕጽል ደረጃ ተኣታትሉ።' : 'ንዝቕጽል ደረጃ 9/10 ክንደይ ኣለኩም።';
+  $('btnNextLevel').style.display = (passed && level<LEVELS) ? 'inline-block' : 'none';
+}
+
+/* helpers */
+window.addEventListener('beforeunload', stopTimer);
+</script>
+</body>
+</html>
